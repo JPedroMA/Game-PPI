@@ -26,11 +26,16 @@ const restartButton = document.getElementById('restart-button');
 
 restartButton.addEventListener('click', restartGame);
 
+var audio = document.getElementById("song");
+  
+
+
 function shuffle(array) {
     array.sort(() => Math.random() - 0.5);
 }
 
 function createCard(image) {
+    audio.volume = 0.001;
     const card = document.createElement('div');
     card.classList.add('card');
     card.dataset.image = image;
@@ -70,6 +75,8 @@ function checkForMatch() {
     if (isMatch) {
         disableCards();
         score+=1;
+        audio.volume += 0.1;
+        console.log(audio.volume);
         console.log(score)
         if(score==10) {
             finishGame();
