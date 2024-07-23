@@ -1,20 +1,21 @@
 const images = [
-    'https://static.wikia.nocookie.net/hades_gamepedia_en/images/0/0a/FP_Hades.png/revision/latest/scale-to-width-down/250?cb=20181212021114',
-    'https://static.wikia.nocookie.net/hades_gamepedia_en/images/c/cf/FP_Nyx.png/revision/latest/scale-to-width-down/250?cb=20200823220402',
-    'https://static.wikia.nocookie.net/hades_gamepedia_en/images/1/1c/FP_Zeus.png/revision/latest/scale-to-width-down/250?cb=20181212021131',
-    'https://static.wikia.nocookie.net/hades_gamepedia_en/images/2/26/FP_Poseidon.png/revision/latest/scale-to-width-down/250?cb=20181212021121',
-    'https://static.wikia.nocookie.net/hades_gamepedia_en/images/4/44/FP_Athena.png/revision/latest/scale-to-width-down/250?cb=20230123012447',
-    'https://static.wikia.nocookie.net/hades_gamepedia_en/images/c/c6/FP_Artemis.png/revision/latest/scale-to-width-down/250?cb=20190117084925',
-    'https://static.wikia.nocookie.net/hades_gamepedia_en/images/c/cc/FP_Aphrodite.png/revision/latest/scale-to-width-down/250?cb=20230123012313',
-    'https://static.wikia.nocookie.net/hades_gamepedia_en/images/6/66/FP_Dionysus.png/revision/latest/scale-to-width-down/250?cb=20230123011541',
-    'https://static.wikia.nocookie.net/hades_gamepedia_en/images/1/16/FP_Hermes.png/revision/latest/scale-to-width-down/250?cb=20230123012857',
-    'https://static.wikia.nocookie.net/hades_gamepedia_en/images/1/14/FP_Demeter.png/revision/latest/scale-to-width-down/250?cb=20230123013205'
+    'src/img/FP_Aphrodite.png',
+    'src/img/FP_Artemis.png',
+    'src/img/FP_Athena.png',
+    'src/img/FP_Demeter.jpg',
+    'src/img/FP_Dionysus.jpg',
+    'src/img/FP_Hades.png',
+    'src/img/FP_Hermes.png',
+    'src/img/FP_Nyx.png',
+    'src/img/FP_Poseidon.png',
+    'src/img/FP_Zeus.jpg'
 ];
 
 const cards = [...images, ...images];
 shuffle(cards);
 
 let attempts = 0;
+let score = 0;
 let firstCard = null;
 let secondCard = null;
 let lockBoard = false;
@@ -41,7 +42,7 @@ function createCard(image) {
             </div>
         </div>
     `;
-    console.log(image)
+    console.log()
     card.addEventListener('click', () => flipCard(card));
     return card;
 }
@@ -68,6 +69,11 @@ function checkForMatch() {
     const isMatch = firstCard.dataset.image === secondCard.dataset.image;
     if (isMatch) {
         disableCards();
+        score+=1;
+        console.log(score)
+        if(score==10) {
+            finishGame();
+        }
     } else {
         unflipCards();
     }
@@ -98,5 +104,34 @@ function restartGame() {
     shuffle(cards);
     cards.forEach(image => gridContainer.appendChild(createCard(image)));
 }
+
+function finishGame() {
+    document.body.innerHTML = '';
+
+    const div = document.createElement('div');
+    div.style.position = 'fixed';
+    div.style.top = '50%';
+    div.style.left = '50%';
+    div.style.transform = 'translate(-50%, -50%)';
+    div.style.textAlign = 'center';
+    div.style.width = '100%';
+    div.style.height = '100%';
+    div.style.backgroundColor = '#f0f0f0';
+    div.style.opacity = '0.5';
+    div.style.padding = '20px';
+    div.style.border = '1px solid #ccc';
+    div.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.1)';
+
+    const heading = document.createElement('h1');
+    heading.textContent = 'Você venceu!!!';
+    heading.style.margin = '25%'
+    heading.style.fontSize = '50px'
+    heading.style.fontWeight = '700'
+
+    div.appendChild(heading);
+
+    document.body.appendChild(div);
+}
+
 
 document.addEventListener('DOMContentLoaded', restartGame);
