@@ -5,11 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo da Memória</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="/src/img/icon.png">
+    <link href="https://fonts.cdnfonts.com/css/hades" rel="stylesheet">
 </head>
 <body>
     <div class="game-container">
         <div class="game-info">
-            <button id="restart-button">Reiniciar Jogo</button>
+            <div class="game-btn">
+            <button class="ui-btn" id="restart-button">
+                <span>
+                    Reiniciar Jogo
+                </span>
+            </button>
+            </div>
             <p>Tentativas: <span id="attempts">0</span></p>
         </div>
         <div class="grid-container" id="grid-container">
