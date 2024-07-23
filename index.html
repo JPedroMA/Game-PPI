@@ -11,17 +11,19 @@
 <body>
     <div class="game-container">
         <div class="game-info">
-            <div class="game-btn">
-            <button class="ui-btn" id="restart-button">
+            
+            <h2>Tentativas: <span id="attempts">0</span></h2>
+        </div>
+        <div class="grid-container" id="grid-container">
+        </div>
+        <div style="margin: 20px;"></div>
+        <div class="game-btn">
+            <button class="ui-btn" id="restart-button" style="width: 100%;">
                 <span>
                     Reiniciar Jogo
                 </span>
             </button>
             </div>
-            <p>Tentativas: <span id="attempts">0</span></p>
-        </div>
-        <div class="grid-container" id="grid-container">
-        </div>
     </div>
     <audio loop autoplay id="song">
         <source src="src/sfx/Hades - No Escape.mp3" type="audio/mp3">

@@ -84,7 +84,7 @@ body {
 }
 
 .card-back {
-    background-color: #5e5050;
+    background: linear-gradient(68.15deg, #393572 16.62%, #ffffff 85.61%);
     transform: rotateY(180deg);
     display: flex;
     justify-content: center;
@@ -94,6 +94,12 @@ body {
 
 .card-back img {
     width: 90%;
+    height: 90%;
+    object-fit: cover;
+}
+
+.card-front img {
+    width: 10%;
     height: 90%;
     object-fit: cover;
 }
