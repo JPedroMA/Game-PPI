@@ -14,6 +14,7 @@ const images = [
 const cards = [...images, ...images];
 shuffle(cards);
 
+let velvet = 'https://www.svgrepo.com/show/322475/hades-symbol.svg'
 let attempts = 0;
 let score = 0;
 let firstCard = null;
@@ -23,25 +24,39 @@ let lockBoard = false;
 const gridContainer = document.getElementById('grid-container');
 const attemptsElement = document.getElementById('attempts');
 const restartButton = document.getElementById('restart-button');
+const audio = document.getElementById("song");
+const start = 0
 
 restartButton.addEventListener('click', restartGame);
 
-var audio = document.getElementById("song");
+
+
+
+
+function loadSound(coisax){
+    coisax.volume = 0.5;
+}
+function startS(coisax){
+    coisax.loop = true;
+    coisax.play();
+    
+}
   
-
-
 function shuffle(array) {
     array.sort(() => Math.random() - 0.5);
+    
 }
 
 function createCard(image) {
-    audio.volume = 0.001;
     const card = document.createElement('div');
     card.classList.add('card');
     card.dataset.image = image;
+    console.log(velvet)
     card.innerHTML = `
         <div class="card-inner">
-            <div class="card-front"></div>
+            <div class="card-front">
+                <img src="${velvet}" alt="card image">
+            </div>
             <div class="card-back">
                 <img src="${image}" alt="card image">
             </div>
@@ -75,8 +90,7 @@ function checkForMatch() {
     if (isMatch) {
         disableCards();
         score+=1;
-        audio.volume += 0.1;
-        console.log(audio.volume);
+        /*audio.volume += 0.1;*/
         console.log(score)
         if(score==10) {
             finishGame();
@@ -110,6 +124,7 @@ function restartGame() {
     gridContainer.innerHTML = '';
     shuffle(cards);
     cards.forEach(image => gridContainer.appendChild(createCard(image)));
+    audio.volume = 0.01;  
 }
 
 function finishGame() {
@@ -124,13 +139,13 @@ function finishGame() {
     div.style.width = '100%';
     div.style.height = '100%';
     div.style.backgroundColor = '#f0f0f0';
-    div.style.opacity = '0.5';
+    div.style.opacity = '0.7';
     div.style.padding = '20px';
     div.style.border = '1px solid #ccc';
     div.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.1)';
 
     const heading = document.createElement('h1');
-    heading.textContent = 'Você venceu!!!';
+    heading.textContent = 'Voce venceu!!!';
     heading.style.margin = '25%'
     heading.style.fontSize = '50px'
     heading.style.fontWeight = '700'
